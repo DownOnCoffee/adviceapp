@@ -16,25 +16,43 @@ function MainPage() {
   useEffect(() => {
     fetchadvice(); // The advice has to be shown when the page is refreshed 
   }, []);
- 
-     const fetchadvice=()=>{
-      axios({
-      method: "get",
-      url: "https://api.adviceslip.com/advice",
-    })
-      .then(function (response) {
-  
-        // console.log(response);
-        setobj( {
-          advice: response.data.slip.advice, 
-          id:response.data.slip.id,
-        });
-       
-      })
-      .catch(function (error) {
-        console.error("Error occurred:", error);
+
+  const fetchadvice = async () => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: 'https://api.adviceslip.com/advice',
       });
+
+      setobj({
+        advice: response.data.slip.advice,
+        id: response.data.slip.id,
+      });
+    } catch (error) {
+      console.error('Error occurred:', error);
     }
+  };
+
+  
+ 
+    //  const fetchadvice=()=>{
+    //   axios({
+    //   method: "get",
+    //   url: "https://api.adviceslip.com/advice",
+    // })
+    //   .then(function (response) {
+  
+    //     // console.log(response);
+    //     setobj( {
+    //       advice: response.data.slip.advice, 
+    //       id:response.data.slip.id,
+    //     });
+       
+    //   })
+    //   .catch(function (error) {
+    //     console.error("Error occurred:", error);
+    //   });
+    // }
 
 
   return (
